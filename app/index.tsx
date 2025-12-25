@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 30,
+    backgroundColor: Platform.OS === "ios" ? "lightgray" : "green"
   },
   formContainer: {
     width: "100%",
