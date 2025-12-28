@@ -1,160 +1,134 @@
 import { Image } from "expo-image";
-import { Link } from "expo-router";
-import {
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { Link, useRouter } from "expo-router";
+import { Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
+  const router = useRouter();
+
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView horizontal={false}>
-        <Image
-          source={require("@/assets/images/cup.png")}
-          style={{ width: 160, height: 160, resizeMode: "contain" }}
-        />
-        <Image
-          source={{
-            uri: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-3402c4f.jpg?quality=90&resize=500,454",
-          }}
-          style={{ width: 160, height: 160, resizeMode: "contain" }}
-        />
-        <Image
-          source={{
-            uri: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-3402c4f.jpg?quality=90&resize=500,454",
-          }}
-          style={{ width: 160, height: 160, resizeMode: "contain" }}
-        />
-        <Image
-          source={{
-            uri: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-3402c4f.jpg?quality=90&resize=500,454",
-          }}
-          style={{ width: 160, height: 160, resizeMode: "cover" }}
-        />
-        <Image
-          source={{
-            uri: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-3402c4f.jpg?quality=90&resize=500,454",
-          }}
-          style={{ width: 160, height: 160, resizeMode: "contain" }}
-        />
-        <Image
-          source={{
-            uri: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-3402c4f.jpg?quality=90&resize=500,454",
-          }}
-          style={{ width: 160, height: 160, resizeMode: "contain" }}
-        />
-        <Image
-          source={{
-            uri: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-3402c4f.jpg?quality=90&resize=500,454",
-          }}
-          style={{ width: 160, height: 160, resizeMode: "contain" }}
-        />
-        <Image
-          source={{
-            uri: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-3402c4f.jpg?quality=90&resize=500,454",
-          }}
-          style={{ width: 160, height: 160, resizeMode: "contain" }}
-        />
-        <Image
-          source={{
-            uri: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-3402c4f.jpg?quality=90&resize=500,454",
-          }}
-          style={{ width: 160, height: 160, resizeMode: "contain" }}
-        />
-        <Image
-          source={{
-            uri: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-3402c4f.jpg?quality=90&resize=500,454",
-          }}
-          style={{ width: 160, height: 160, resizeMode: "contain" }}
-        />
-        <Image
-          source={{
-            uri: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-3402c4f.jpg?quality=90&resize=500,454",
-          }}
-          style={{ width: 160, height: 160, resizeMode: "contain" }}
-        />
-      </ScrollView>
+    <>
+      <StatusBar barStyle="light-content" />
 
-      <View style={{ gap: 10, width: "100%" }}>
-        <TextInput
-          style={styles.formContainer}
-          onChangeText={(text) => console.log(text)}
-          placeholder="Enter your name"
-        />
-        <TextInput
-            style={styles.formContainer}
-          onChangeText={(text) => console.log(text)}
-          placeholder="Enter your email address"
-          keyboardType="email-address"
-        />
-        <TextInput
-          style={styles.formContainer}
-          onChangeText={(text) => console.log(text)}
-          placeholder="Enter your password"
-          secureTextEntry={true}
-        />
-        <TextInput
-          style={styles.formContainer}
-          onChangeText={(text) => console.log(text)}
-          placeholder="Enter your number"
-          keyboardType="numeric"
-          maxLength={10}
-        />
-        <Pressable
-          onPress={() => console.log("Submit")}
-          style={styles.button}
-        >
-          <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
-            Submit
-          </Text>
-        </Pressable>
-      </View>
+      <SafeAreaView style={styles.safe}>
+        <View style={styles.container}>
+          <Image
+            source={{
+              uri: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-3402c4f.jpg?quality=90&resize=1200,1090",
+            }}
+            style={styles.bgImage}
+            contentFit="cover"
+          />
+          <View style={styles.bgOverlay} />
 
-      {/* h1, h2, h3, h4, h5, h6, p, span */}
-      <Text
-        style={{
-          fontSize: 26,
-          fontWeight: "bold",
-          color: Platform.OS === "ios" ? "blue" : "green",
-        }}
-        numberOfLines={2}
-        ellipsizeMode="tail"
-      >
-        hello world in green and bold and number of lines 1 and ellipsize mode
-        tail
-      </Text>
-      {/* <a href="/contact/page">Go to Contact Page</a>  => <Link/>*/}
-      <Link href="/contact/page">Go to Contact Page</Link>
-    </SafeAreaView>
+          <View style={styles.content}>
+            <View style={styles.heroWrap}>
+              <Image
+                source={{
+                  uri: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-3402c4f.jpg?quality=90&resize=1200,1090",
+                }}
+                style={styles.heroImage}
+                contentFit="cover"
+              />
+            </View>
+
+            <Text style={styles.title}>
+              Enjoy quality brew{"\n"}with the finest of{"\n"}flavours
+            </Text>
+            <Text style={styles.subtitle}>
+              The best gain, the finest roast, the{"\n"}powerful flavor.
+            </Text>
+
+            <Pressable
+              style={styles.button}
+              onPress={() => router.push("/signin/page")}
+            >
+              <Text style={styles.buttonText}>Get Started</Text>
+            </Pressable>
+
+            {/* <a href="/contact/page">Go to Contact Page</a>  => <Link/>*/}
+            <Link href="/contact/page" style={styles.hiddenLink}>
+              Go to Contact Page
+            </Link>
+          </View>
+        </View>
+      </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: "#0F1720",
+  },
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 30,
-    backgroundColor: Platform.OS === "ios" ? "lightgray" : "green"
+    backgroundColor: "#0F1720",
   },
-  formContainer: {
+  bgImage: {
+    ...StyleSheet.absoluteFillObject,
+    opacity: 0.2,
+  },
+  bgOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(15,23,32,0.65)",
+  },
+  content: {
+    flex: 1,
+    justifyContent: "flex-end",
+    paddingHorizontal: 26,
+    paddingBottom: 22,
+    gap: 14,
+  },
+  heroWrap: {
+    alignSelf: "center",
     width: "100%",
-    height: 40,
-    borderWidth: 1,
-    borderColor: "black",
-    padding: 10,
+    maxWidth: 360,
+    height: 360,
+    borderRadius: 18,
+    overflow: "hidden",
+    marginBottom: 10,
+    backgroundColor: "rgba(255,255,255,0.04)",
   },
-  button:{
-    backgroundColor: "blue",
-    padding: 10,
-    borderRadius: 5,
+  heroImage: {
+    width: "100%",
+    height: "100%",
+  },
+  title: {
+    color: "#FFFFFF",
+    fontSize: 30,
+    fontWeight: "600",
+    textAlign: "center",
+    lineHeight: 36,
+  },
+  subtitle: {
+    color: "rgba(255,255,255,0.7)",
+    fontSize: 14,
+    textAlign: "center",
+    lineHeight: 20,
+    marginBottom: 6,
+  },
+  button: {
+    height: 54,
+    borderRadius: 12,
+    backgroundColor: "#8B5A2B",
     alignItems: "center",
     justifyContent: "center",
-  }
+    shadowColor: "#000000",
+    shadowOpacity: 0.25,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 8 },
+    elevation: 6,
+    marginTop: 6,
+  },
+  buttonText: {
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  hiddenLink: {
+    opacity: 0,
+    height: 0,
+  },
 });
