@@ -1,6 +1,7 @@
+import Button from "@/components/ui/button";
 import { Image } from "expo-image";
 import { Link, useRouter } from "expo-router";
-import { Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
+import { StatusBar, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -39,15 +40,14 @@ export default function Index() {
               The best gain, the finest roast, the{"\n"}powerful flavor.
             </Text>
 
-            <Pressable
-              style={styles.button}
-              onPress={() => router.push("/signin/page")}
+            <Button
+              onPress={() => router.push("/(tabs)")}
             >
-              <Text style={styles.buttonText}>Get Started</Text>
-            </Pressable>
+              Get Started
+            </Button>
 
             {/* <a href="/contact/page">Go to Contact Page</a>  => <Link/>*/}
-            <Link href="/contact/page" style={styles.hiddenLink}>
+            <Link href="/coffee/page" style={styles.hiddenLink}>
               Go to Contact Page
             </Link>
           </View>
@@ -126,6 +126,9 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 18,
     fontWeight: "600",
+  },
+  buttonDefault: {
+    backgroundColor: "#45a323",
   },
   hiddenLink: {
     opacity: 0,

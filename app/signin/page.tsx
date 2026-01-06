@@ -17,6 +17,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { singInSchema, SingInSchemaType } from "./sign-in.schema";
+import Button from "@/components/ui/button";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function SignInScreen() {
   const {
@@ -43,6 +45,10 @@ export default function SignInScreen() {
     }
   };
 
+  const handleBack = () => {
+    router.replace("/");
+  };
+
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -52,6 +58,9 @@ export default function SignInScreen() {
           style={styles.container}
           behavior={Platform.OS === "ios" ? "padding" : undefined}
         >
+          <Pressable onPress={handleBack}>
+            <Ionicons name="chevron-back" size={22} color="white" />
+          </Pressable>
           <View style={styles.header}>
             <Image
               source={require("@/assets/images/cup.png")}
@@ -104,10 +113,7 @@ export default function SignInScreen() {
             {errors.password && (
               <Text style={styles.error}>{errors.password.message}</Text>
             )}
-
-            <Pressable style={styles.button} onPress={handleSubmit(onSubmit)}>
-              <Text style={styles.buttonText}>Signin</Text>
-            </Pressable>
+            <Button onPress={handleSubmit(onSubmit)}>Signin</Button>
           </View>
         </KeyboardAvoidingView>
       </SafeAreaView>

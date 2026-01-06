@@ -3,9 +3,20 @@ import { Tabs } from "expo-router";
 
 export default function TabsLayout() {
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Tabs.Screen
         name="index"
+        options={{
+          href: null,
+          headerShown: false,
+        }}
+      />
+      <Tabs.Screen
+        name="home"
         options={{
           headerShown: false,
           title: "Home",
@@ -14,17 +25,16 @@ export default function TabsLayout() {
           ),
         }}
       />
-
-        <Tabs.Screen
-            name="profile"
-            options={{
-                headerShown: false,
-                title: "Profile",
-                tabBarIcon: ({ color, size }) => (
-                  <Ionicons name="person" color={color} size={size} />
-                ),
-              }}
-        />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          headerShown: false,
+          title: "Profile",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person" color={color} size={size} />
+          ),
+        }}
+      />
       <Tabs.Screen
         name="settings"
         options={{
