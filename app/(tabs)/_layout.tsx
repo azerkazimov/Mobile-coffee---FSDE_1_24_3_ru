@@ -6,15 +6,18 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
+        tabBarActiveTintColor: "#8B5A2B",
+        tabBarInactiveTintColor: "#999",
+        tabBarStyle: {
+          backgroundColor: "#fff",
+          borderTopWidth: 1,
+          borderTopColor: "#eee",
+          height: 60,
+          paddingBottom: 8,
+          paddingTop: 8,
+        },
       }}
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          href: null,
-          headerShown: false,
-        }}
-      />
       <Tabs.Screen
         name="home"
         options={{

@@ -41,7 +41,7 @@ export default function Index() {
             </Text>
 
             <Button
-              onPress={() => router.push("/(tabs)")}
+              onPress={() => router.push("/(tabs)/home")}
             >
               Get Started
             </Button>
