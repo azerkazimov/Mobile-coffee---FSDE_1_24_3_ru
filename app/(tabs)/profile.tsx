@@ -1,6 +1,10 @@
+import Button from "@/components/ui/button";
 import { layoutTheme } from "@/constant/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { ThemeType } from "@/types/theme-types";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRouter } from "expo-router";
 
 import {
   Platform,
@@ -12,6 +16,7 @@ import {
 } from "react-native";
 
 export default function Profile() {
+  const router = useRouter();
   const { colorScheme } = useTheme();
   const styles = getStyles(colorScheme);
 
@@ -23,13 +28,22 @@ export default function Profile() {
     console.log("android");
   }
 
+  const handleLogout = () => {
+    AsyncStorage.removeItem("isLoggedIn");
+    router.push("/signin/page");
+  };
+
   return (
     <>
-    <StatusBar barStyle={colorScheme === "dark" ? "light-content" : "dark-content"} />
-      <View style={styles.container}>
+      <StatusBar
+        barStyle={colorScheme === "dark" ? "light-content" : "dark-content"}
+      />
+      <View style={{...styles.container, width: width}}>
         <Text style={styles.title}>Profile</Text>
         <Text style={styles.text}>Welcome to your profile page!</Text>
-        <View style={{ ...styles.boxContainer, width: width - 80 }} />
+        <Button onPress={handleLogout} style={styles.logoutButton}>
+          <Text>Logout</Text>
+        </Button>
       </View>
     </>
   );
@@ -84,5 +98,8 @@ const getStyles = (colorSchema: ThemeType) =>
           ? layoutTheme.colors.text.primary
           : layoutTheme.colors.text.tertiary,
       marginBottom: 50,
+    },
+    logoutButton: {
+      paddingHorizontal: 20,
     },
   });

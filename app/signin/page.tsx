@@ -4,6 +4,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Pressable,
+  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -37,7 +38,7 @@ export default function SignInScreen() {
     console.log("onSubmit");
     console.log(data);
     try {
-      router.push("/coffee/page");
+      router.push("/(tabs)/home");
       AsyncStorage.setItem("isLoggedIn", "true");
       AsyncStorage.setItem("user", JSON.stringify(data));
     } catch (error) {
@@ -61,60 +62,62 @@ export default function SignInScreen() {
           <Pressable onPress={handleBack}>
             <Ionicons name="chevron-back" size={22} color="white" />
           </Pressable>
-          <View style={styles.header}>
-            <Image
-              source={require("@/assets/images/cup.png")}
-              style={styles.logo}
-              contentFit="contain"
-            />
-            <View style={styles.brandRow}>
-              <Text style={styles.brandCoffee}>Coffee</Text>
-              <Text style={styles.brandShop}>Shop</Text>
+          <ScrollView>
+            <View style={styles.header}>
+              <Image
+                source={require("@/assets/images/cup.png")}
+                style={styles.logo}
+                contentFit="contain"
+              />
+              <View style={styles.brandRow}>
+                <Text style={styles.brandCoffee}>Coffee</Text>
+                <Text style={styles.brandShop}>Shop</Text>
+              </View>
             </View>
-          </View>
 
-          <View style={styles.form}>
-            <Controller
-              control={control}
-              name="email"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                  placeholder="admin@gmail.com"
-                  placeholderTextColor="rgba(255,255,255,0.6)"
-                  autoCapitalize="none"
-                  keyboardType="email-address"
-                  style={styles.input}
-                />
+            <View style={styles.form}>
+              <Controller
+                control={control}
+                name="email"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    placeholder="admin@gmail.com"
+                    placeholderTextColor="rgba(255,255,255,0.6)"
+                    autoCapitalize="none"
+                    keyboardType="email-address"
+                    style={styles.input}
+                  />
+                )}
+              />
+              {errors.email && (
+                <Text style={styles.error}>{errors.email.message}</Text>
               )}
-            />
-            {errors.email && (
-              <Text style={styles.error}>{errors.email.message}</Text>
-            )}
 
-            <Controller
-              control={control}
-              name="password"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                  placeholder="***********"
-                  placeholderTextColor="rgba(255,255,255,0.6)"
-                  autoCapitalize="none"
-                  secureTextEntry
-                  style={styles.input}
-                />
+              <Controller
+                control={control}
+                name="password"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    placeholder="***********"
+                    placeholderTextColor="rgba(255,255,255,0.6)"
+                    autoCapitalize="none"
+                    secureTextEntry
+                    style={styles.input}
+                  />
+                )}
+              />
+              {errors.password && (
+                <Text style={styles.error}>{errors.password.message}</Text>
               )}
-            />
-            {errors.password && (
-              <Text style={styles.error}>{errors.password.message}</Text>
-            )}
-            <Button onPress={handleSubmit(onSubmit)}>Signin</Button>
-          </View>
+              <Button onPress={handleSubmit(onSubmit)}>Signin</Button>
+            </View>
+          </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
     </>

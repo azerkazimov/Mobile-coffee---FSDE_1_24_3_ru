@@ -1,19 +1,26 @@
 import CoffeeCard from "@/components/coffee/coffee-card";
 import { coffeeData } from "@/data/coffee";
-import { FlatList, StyleSheet } from "react-native";
+import { useTheme } from "@/hooks/use-theme";
+import { FlatList, StatusBar, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {
+  const { colorScheme } = useTheme();
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={coffeeData}
-        renderItem={({ item }) => <CoffeeCard coffee={item} />}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={2}
-        contentContainerStyle={styles.listContainer}
+    <>
+      <StatusBar
+        barStyle={colorScheme === "dark" ? "light-content" : "dark-content"}
       />
-    </SafeAreaView>
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          data={coffeeData}
+          renderItem={({ item }) => <CoffeeCard coffee={item} />}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={2}
+          contentContainerStyle={styles.listContainer}
+        />
+      </SafeAreaView>
+    </>
   );
 }
 

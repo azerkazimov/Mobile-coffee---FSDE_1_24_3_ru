@@ -1,17 +1,39 @@
 import { layoutTheme } from "@/constant/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { ThemeType } from "@/types/theme-types";
-import { StyleSheet, Text, View } from "react-native";
+import { StatusBar, StyleSheet, Switch, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Settings() {
-  const { colorScheme } = useTheme();
+  const { colorScheme, toggleTheme } = useTheme();
   const styles = getStyles(colorScheme);
 
+  const handleThemeChange = () => {
+    toggleTheme(colorScheme === "dark" ? "light" : "dark");
+  };
+
   return (
-    <View style={styles.container}>
+    <>
+    <StatusBar barStyle={colorScheme === "dark" ? "light-content" : "dark-content"} />
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Settings</Text>
-      <Text style={styles.text}>Configure your app settings here.</Text>
-    </View>
+
+      <View style={styles.settingsContainer}>
+        <View style={styles.settingItem}>
+          <Text style={styles.settingItemTitle}> Theme</Text>
+          <Switch
+            value={colorScheme === "dark"}
+            onValueChange={handleThemeChange}
+            trackColor={{
+              true: layoutTheme.colors.secondary[700],
+              false: layoutTheme.colors.primary[500],
+            }}
+            thumbColor={colorScheme === "dark" ? layoutTheme.colors.background.white : layoutTheme.colors.secondary[700]}
+          />
+        </View>
+      </View>
+    </SafeAreaView>
+    </>
   );
 }
 
@@ -42,5 +64,22 @@ const getStyles = (colorSchema: ThemeType) =>
         colorSchema === "light"
           ? layoutTheme.colors.text.primary
           : layoutTheme.colors.text.tertiary,
+    },
+    settingsContainer: {
+      flex: 1,
+    },
+    settingItem: {
+      width: "100%",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    settingItemTitle: {
+      fontFamily: layoutTheme.fonts.sora.bold,
+      fontSize: 16,
+      color:
+        colorSchema === "light"
+          ? layoutTheme.colors.text.primary
+          : layoutTheme.colors.text.inverse,
     },
   });

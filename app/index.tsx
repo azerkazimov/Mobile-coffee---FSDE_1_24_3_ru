@@ -1,11 +1,35 @@
 import Button from "@/components/ui/button";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Image } from "expo-image";
 import { Link, useRouter } from "expo-router";
-import { StatusBar, StyleSheet, Text, View } from "react-native";
+import { useEffect } from "react";
+import { Alert, StatusBar, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   const router = useRouter();
+
+  useEffect(()=>{
+    const checkLoggedIn = async ()=>{
+      try {
+        const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
+        if(isLoggedIn){
+          router.push("/(tabs)/home");
+        } else {
+          router.push("/signin/page");
+        }
+      } catch (error) {
+        Alert.alert("Error", "Failed to check if user is logged in");
+        console.log(error);
+      }
+    }
+    const timer = setTimeout(()=>{
+      checkLoggedIn();
+    }, 1000);
+    return ()=> clearTimeout(timer);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>
@@ -41,13 +65,13 @@ export default function Index() {
             </Text>
 
             <Button
-              onPress={() => router.push("/(tabs)/home")}
+              onPress={() => router.push("/signin/page")}
             >
               Get Started
             </Button>
 
             {/* <a href="/contact/page">Go to Contact Page</a>  => <Link/>*/}
-            <Link href="/coffee/page" style={styles.hiddenLink}>
+            <Link href="/contact/page" style={styles.hiddenLink}>
               Go to Contact Page
             </Link>
           </View>

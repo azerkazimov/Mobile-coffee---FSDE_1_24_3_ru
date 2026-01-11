@@ -19,7 +19,7 @@ export default function CoffeeCard({ coffee }: { coffee: Coffee }) {
   const { increment, decrement, reset, count } = useCount();
   return (
     <View style={styles.container}>
-      {isLoading ? <Text>Loading...</Text> : <Text>Loaded</Text>}
+      {isLoading ? <Text>Loading...</Text> : ""}
       <View style={styles.cardContainer}>
         <Text>
           <Ionicons name="star" size={16} color="orange" />
