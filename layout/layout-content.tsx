@@ -50,6 +50,14 @@ export default function LayoutContent() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="[path]/page"
+        options={{
+          title: "Coffee Details",
+          headerShown: false,
+          animation:"slide_from_bottom"
+        }}
+      />
     </Stack>
   );
 }

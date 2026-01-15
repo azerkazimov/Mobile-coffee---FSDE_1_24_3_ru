@@ -5,4 +5,5 @@ export type Coffee = {
   price: number;
   image: string;
   rating: number;
+  path: string;
 };

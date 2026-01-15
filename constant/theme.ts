@@ -46,6 +46,15 @@ export const layoutTheme = {
             gray: "#a6a5a2",
         },
 
+        gradients: {
+            primary: ["#192438", "#313130"],
+            secondary: ["#854C1F", "#5E3415"],
+            accent: ["#95BCCC", "#6E9BA8"],
+            background: ["#FFFFFF", "#F5F5F5"],
+            text: ["#000000", "#4F4F4F"],
+            button: ["#854C1F", "#5E3415"],
+        },
+
         text: {
             primary: "#000000",
             secondary: "#4F4F4F",
