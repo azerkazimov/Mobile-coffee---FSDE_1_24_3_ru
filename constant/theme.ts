@@ -44,6 +44,7 @@ export const layoutTheme = {
             dark: "#1A1A1A",
             light: "#FFFFFF",
             gray: "#a6a5a2",
+            darkBlue: "#1B2332",
         },
 
         gradients: {

@@ -58,6 +58,13 @@ export default function LayoutContent() {
           animation:"slide_from_bottom"
         }}
       />
+      <Stack.Screen
+        name="payment-method/page"
+        options={{
+          title: "Payment Method",
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 }

@@ -8,7 +8,6 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  useWindowDimensions,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -29,7 +28,7 @@ export default function CoffeeDetail() {
     console.log("Favorite");
   };
   const handleAddToCart = () => {
-    console.log("Add to Cart");
+    router.push("/payment-method/page");
   };
   const handleSize = () => {
     console.log("Size");
@@ -75,7 +74,7 @@ export default function CoffeeDetail() {
           </View>
           <View style={styles.sizeContainer}>
             <Pressable onPress={() => handleSize()} style={styles.sizeButton}>
-                <Text style={styles.sizeButtonText}>S</Text>
+              <Text style={styles.sizeButtonText}>S</Text>
               S
             </Pressable>
             <Pressable onPress={() => handleSize()} style={styles.sizeButton}>
@@ -86,7 +85,7 @@ export default function CoffeeDetail() {
             </Pressable>
           </View>
         </View>
-        <Button onPress={() => handleAddToCart()}>Add to Cart</Button>
+        <Button onPress={() => handleAddToCart()}>Buy now</Button>
       </SafeAreaView>
     </>
   );
@@ -183,10 +182,10 @@ const getStyles = (colorSchema: string) =>
       alignItems: "center",
       justifyContent: "center",
     },
-    sizeButtonText:{
-        fontFamily: layoutTheme.fonts.sora.regular,
-        fontSize: 14,
-        color: layoutTheme.colors.text.inverse,
+    sizeButtonText: {
+      fontFamily: layoutTheme.fonts.sora.regular,
+      fontSize: 14,
+      color: layoutTheme.colors.text.inverse,
 
     }
   });
