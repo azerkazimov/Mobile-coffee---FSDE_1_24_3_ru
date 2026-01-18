@@ -1,4 +1,4 @@
-import CoffeeCard from "@/components/coffee/coffee-card";
+import CoffeeCard from "@/components/screen/coffee/coffee-card";
 import { layoutTheme } from "@/constant/theme";
 import { coffeeData } from "@/data/coffee";
 import { useTheme } from "@/hooks/use-theme";

@@ -1,14 +1,20 @@
+import PaymentForm from "@/components/screen/payment/payment-form";
 import { layoutTheme } from "@/constant/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function Payment() {
     const { colorScheme } = useTheme()
     const styles = getStyles(colorScheme)
     const router = useRouter()
+
+    const handlePay = () => {
+
+        router.push("/payment/confirmation/page");
+    }
 
     return (
         <View style={styles.container}>
@@ -32,73 +38,10 @@ export default function Payment() {
 
             {/* Content */}
             <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-                {/* Card Number */}
-                <View style={styles.formGroup}>
-                    <Text style={styles.label}>Card Number</Text>
-                    <View style={styles.inputContainer}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="0000 0000 0000000 00000000"
-                            placeholderTextColor={layoutTheme.colors.neutral.medium}
-                            editable={false}
-                        />
-                    </View>
-                </View>
-
-                {/* Card Holder Name */}
-                <View style={styles.formGroup}>
-                    <Text style={styles.label}>Card Holder Name</Text>
-                    <View style={styles.inputContainer}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Abdur Rohim Mia"
-                            placeholderTextColor={layoutTheme.colors.neutral.medium}
-                            editable={false}
-                        />
-                    </View>
-                </View>
-
-                {/* Expiry Date and CVV */}
-                <View style={styles.rowGroup}>
-                    <View style={[styles.formGroup, styles.halfWidth]}>
-                        <Text style={styles.label}>Expiry Date</Text>
-                        <View style={styles.inputContainer}>
-                            <TextInput
-                                style={styles.input}
-                                placeholder="MM/YY"
-                                placeholderTextColor={layoutTheme.colors.neutral.medium}
-                                editable={false}
-                            />
-                        </View>
-                    </View>
-
-                    <View style={[styles.formGroup, styles.halfWidth]}>
-                        <Text style={styles.label}>CVV</Text>
-                        <View style={styles.inputContainer}>
-                            <TextInput
-                                style={styles.input}
-                                placeholder="3 Digits"
-                                placeholderTextColor={layoutTheme.colors.neutral.medium}
-                                editable={false}
-                            />
-                        </View>
-                    </View>
-                </View>
-
-                {/* Order Accepted Message */}
-                <View style={styles.messageContainer}>
-                    <Text style={styles.message}>
-                        Your order has been accepted. Your order has been accepted. Your order has been accepted
-                    </Text>
-                </View>
+                <PaymentForm />
             </ScrollView>
 
-            {/* Pay Button */}
-            <View style={styles.bottomSection}>
-                <TouchableOpacity style={styles.payButton}>
-                    <Text style={styles.payButtonText}>Pay $3.75</Text>
-                </TouchableOpacity>
-            </View>
+           
         </View>
     )
 }
