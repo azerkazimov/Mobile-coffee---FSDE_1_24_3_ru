@@ -12,7 +12,6 @@ export default function Payment() {
     const router = useRouter()
 
     const handlePay = () => {
-
         router.push("/payment/confirmation/page");
     }
 
@@ -60,6 +59,7 @@ const getStyles = (colorScheme: string) => StyleSheet.create({
         zIndex: -1,
     },
     header: {
+
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",

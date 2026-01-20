@@ -83,7 +83,7 @@ export default function PaymentForm() {
                                 errors.cardNumber && styles.inputError,
                             ]}
                             value={formattedCardNumber}
-                            placeholder="0000 00000 000000 0000000"
+                            placeholder="0000 0000 0000 0000"
                             placeholderTextColor="#6B7280"
                             onChangeText={formatCardNumber}
                             onBlur={onBlur}
@@ -140,7 +140,7 @@ export default function PaymentForm() {
                                     errors.expiry && styles.inputError,
                                 ]}
                                 value={formattedExpiry}
-                                placeholder="MM/YEAR"
+                                placeholder="MM/YY"
                                 placeholderTextColor="#6B7280"
                                 onChangeText={formatExpiry}
                                 onBlur={onBlur}

@@ -87,6 +87,7 @@ const getStyles = (colorScheme: string) => StyleSheet.create({
         justifyContent: "space-between",
         paddingHorizontal: 20,
         paddingVertical: 15,
+        paddingTop: 50,
     },
     backButton: {
         width: 40,
@@ -138,7 +139,7 @@ const getStyles = (colorScheme: string) => StyleSheet.create({
         backgroundColor: layoutTheme.colors.background.darkBlue,
         borderRadius: 16,
         padding: 24,
-        height: 160,
+        height: 140,
         justifyContent: "center",
         alignItems: "center",
         borderWidth: 1,

@@ -65,6 +65,20 @@ export default function LayoutContent() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="profile/personal-information/page"
+        options={{
+          title: "Personal Information",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="profile/cupons/page"
+        options={{
+          title: "Cupons",
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 }

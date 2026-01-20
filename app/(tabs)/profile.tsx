@@ -2,6 +2,7 @@ import Button from "@/components/ui/button";
 import { layoutTheme } from "@/constant/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { ThemeType } from "@/types/theme-types";
+import { Ionicons } from "@expo/vector-icons";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
@@ -11,6 +12,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   useWindowDimensions,
   View,
 } from "react-native";
@@ -21,6 +23,19 @@ export default function Profile() {
   const styles = getStyles(colorScheme);
 
   const { width } = useWindowDimensions();
+
+  const profileItems = [
+    {
+      title: "Personal Information",
+      icon: "person-outline",
+      href: "/profile/personal-information/page",
+    },
+    {
+      title: "Cupons",
+      icon: "gift-outline",
+      href: "/profile/cupons/page",
+    },
+  ]
 
   if (Platform.OS === "ios") {
     console.log("ios");
@@ -38,12 +53,23 @@ export default function Profile() {
       <StatusBar
         barStyle={colorScheme === "dark" ? "light-content" : "dark-content"}
       />
-      <View style={{...styles.container, width: width}}>
-        <Text style={styles.title}>Profile</Text>
-        <Text style={styles.text}>Welcome to your profile page!</Text>
-        <Button onPress={handleLogout} style={styles.logoutButton}>
-          <Text>Logout</Text>
-        </Button>
+      <View style={{ ...styles.container, width: width }}>
+        <View style={styles.header}>
+          <Text style={styles.title}>Profile</Text>
+          <Button onPress={handleLogout} style={styles.logoutButton}>
+            <Ionicons name="log-out-outline" size={24} color={layoutTheme.colors.neutral.white} />
+          </Button>
+        </View>
+
+        <View style={styles.profileItems}>
+        
+          {profileItems.map((item, index) => (
+            <TouchableOpacity key={index} style={styles.profileItem} onPress={() => router.push(item.href as any)}>
+              <Ionicons name={item.icon as any} size={24} color={layoutTheme.colors.neutral.white} />
+              <Text style={styles.profileItemTitle}>{item.title}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
     </>
   );
@@ -54,31 +80,25 @@ const getStyles = (colorSchema: ThemeType) =>
     container: {
       flex: 1,
       height: "50%",
-      justifyContent: "center",
-      alignItems: "center",
+      paddingTop: 80,
       backgroundColor:
         Platform.OS === "ios"
           ? colorSchema === "dark"
             ? layoutTheme.colors.primary[700]
             : layoutTheme.colors.background.white
           : colorSchema === "dark"
-          ? layoutTheme.colors.secondary[700]
-          : layoutTheme.colors.background.white,
+            ? layoutTheme.colors.secondary[700]
+            : layoutTheme.colors.background.white,
       padding: 20,
     },
-    boxContainer: {
+    header: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
       width: "100%",
-      height: 100,
-      borderWidth: 1,
-      borderColor:
-        colorSchema === "dark"
-          ? layoutTheme.colors.secondary[500]
-          : layoutTheme.colors.background.white,
-      backgroundColor:
-        colorSchema === "dark"
-          ? layoutTheme.colors.primary[900]
-          : layoutTheme.colors.background.white,
+      marginBottom: 40,
     },
+
 
     title: {
       fontSize: 32,
@@ -90,16 +110,27 @@ const getStyles = (colorSchema: ThemeType) =>
           ? layoutTheme.colors.text.primary
           : layoutTheme.colors.text.inverse,
     },
-    text: {
-      fontSize: 16,
-      fontFamily: layoutTheme.fonts.sora.regular,
-      color:
-        colorSchema === "light"
-          ? layoutTheme.colors.text.primary
-          : layoutTheme.colors.text.tertiary,
-      marginBottom: 50,
-    },
     logoutButton: {
-      paddingHorizontal: 20,
+      paddingHorizontal: 10,
+      gap: 10,
+    },
+
+    profileItems: {
+      width: "100%",
+      gap: 10,
+
+    },
+    profileItem: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 20,
+      backgroundColor: colorSchema === "dark" ? layoutTheme.colors.primary[900] : layoutTheme.colors.background.white,
+      padding: 20,
+      borderRadius: 10,
+    },
+    profileItemTitle: {
+      fontSize: 20,
+      fontFamily: layoutTheme.fonts.sora.regular,
+      color: colorSchema === "dark" ? layoutTheme.colors.neutral.white : layoutTheme.colors.text.primary,
     },
   });
