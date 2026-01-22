@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import {
+  Alert,
   Pressable,
   StyleSheet,
   Text,
@@ -14,6 +15,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { coffeeData } from "@/data/coffee";
 import { Image } from "expo-image";
 import Button from "@/components/ui/button";
+import { useCoffeeStore } from "@/store/use-product";
+import { Coffee } from "@/types/coffee-data-types";
 
 export default function CoffeeDetail() {
   const { colorScheme } = useTheme();
@@ -23,13 +26,16 @@ export default function CoffeeDetail() {
 
   const { path } = useLocalSearchParams();
   const coffee = coffeeData.find((coffee) => coffee.path === path);
+  const { addProduct } = useCoffeeStore();
 
   const handleFavorite = () => {
     console.log("Favorite");
   };
   const handleAddToCart = () => {
-    router.push("/payment-method/page");
+    addProduct(coffee as Coffee)
+    Alert.alert("Product added to cart");
   };
+
   const handleSize = () => {
     console.log("Size");
   };
@@ -75,7 +81,6 @@ export default function CoffeeDetail() {
           <View style={styles.sizeContainer}>
             <Pressable onPress={() => handleSize()} style={styles.sizeButton}>
               <Text style={styles.sizeButtonText}>S</Text>
-              S
             </Pressable>
             <Pressable onPress={() => handleSize()} style={styles.sizeButton}>
               <Text style={styles.sizeButtonText}>M</Text>
@@ -85,7 +90,7 @@ export default function CoffeeDetail() {
             </Pressable>
           </View>
         </View>
-        <Button onPress={() => handleAddToCart()}>Buy now</Button>
+        <Button onPress={() => handleAddToCart()}>Add to cart</Button>
       </SafeAreaView>
     </>
   );

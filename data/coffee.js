@@ -6,7 +6,9 @@ export const coffeeData = [
     price: 3.50,
     image: "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400",
     rating: 4.8,
-    path: "espresso"
+    path: "espresso",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 2,
@@ -15,7 +17,9 @@ export const coffeeData = [
     price: 4.75,
     image: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400",
     rating: 4.9,
-    path: "cappuccino"
+    path: "cappuccino",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 3,
@@ -24,7 +28,9 @@ export const coffeeData = [
     price: 5.00,
     image: "https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=400",
     rating: 4.7,
-    path: "caffe-latte"
+    path: "caffe-latte",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 4,
@@ -33,7 +39,9 @@ export const coffeeData = [
     price: 3.75,
     image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400",
     rating: 4.5,
-    path: "americano"
+    path: "americano",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 5,
@@ -42,7 +50,9 @@ export const coffeeData = [
     price: 5.50,
     image: "https://images.unsplash.com/photo-1607260550778-aa9d29444ce1?w=400",
     rating: 4.8,
-    path: "mocha"
+    path: "mocha",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 6,
@@ -51,7 +61,9 @@ export const coffeeData = [
     price: 4.25,
     image: "https://images.unsplash.com/photo-1557006021-b85faa2bc5e2?w=400",
     rating: 4.6,
-    path: "macchiato"
+    path: "macchiato",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 7,
@@ -60,7 +72,9 @@ export const coffeeData = [
     price: 4.50,
     image: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=400",
     rating: 4.9,
-    path: "flat-white"
+    path: "flat-white",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 8,
@@ -69,7 +83,9 @@ export const coffeeData = [
     price: 5.75,
     image: "https://images.unsplash.com/photo-1599305090598-fe179d501227?w=400",
     rating: 4.7,
-    path: "caramel-latte"
+    path: "caramel-latte",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 9,
@@ -78,7 +94,9 @@ export const coffeeData = [
     price: 5.25,
     image: "https://images.unsplash.com/photo-1562155955-1cb2d73488d7?w=400",
     rating: 4.6,
-    path: "vanilla-latte"
+    path: "vanilla-latte",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 10,
@@ -87,7 +105,9 @@ export const coffeeData = [
     price: 4.00,
     image: "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=400",
     rating: 4.5,
-    path: "iced-coffee"
+    path: "iced-coffee",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 11,
@@ -96,7 +116,9 @@ export const coffeeData = [
     price: 4.50,
     image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400",
     rating: 4.8,
-    path: "cold-brew"
+    path: "cold-brew",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 12,
@@ -105,7 +127,9 @@ export const coffeeData = [
     price: 6.00,
     image: "https://images.unsplash.com/photo-1612201142855-47d13c0b0208?w=400",
     rating: 4.9,
-    path: "affogato"
+    path: "affogato",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 13,
@@ -114,7 +138,9 @@ export const coffeeData = [
     price: 4.75,
     image: "https://images.unsplash.com/photo-1610889556528-9a770e32642f?w=400",
     rating: 4.7,
-    path: "turkish-coffee"
+    path: "turkish-coffee",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 14,
@@ -123,7 +149,9 @@ export const coffeeData = [
     price: 4.00,
     image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400",
     rating: 4.6,
-    path: "cortado"
+    path: "cortado",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 15,
@@ -132,7 +160,9 @@ export const coffeeData = [
     price: 7.50,
     image: "https://images.unsplash.com/photo-1514481538271-cf9f99627ab4?w=400",
     rating: 4.8,
-    path: "irish-coffee"
+    path: "irish-coffee",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 16,
@@ -141,7 +171,9 @@ export const coffeeData = [
     price: 5.50,
     image: "https://images.unsplash.com/photo-1609108157530-e97b9702e7a9?w=400",
     rating: 4.9,
-    path: "nitro-cold-brew"
+    path: "nitro-cold-brew",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 17,
@@ -150,7 +182,9 @@ export const coffeeData = [
     price: 5.50,
     image: "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=400",
     rating: 4.7,
-    path: "hazelnut-latte"
+    path: "hazelnut-latte",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 18,
@@ -159,7 +193,9 @@ export const coffeeData = [
     price: 4.25,
     image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400",
     rating: 4.5,
-    path: "cafe-au-lait"
+    path: "cafe-au-lait",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 19,
@@ -168,7 +204,9 @@ export const coffeeData = [
     price: 6.00,
     image: "https://images.unsplash.com/photo-1583432098055-cbc44a8b5e00?w=400",
     rating: 4.8,
-    path: "white-chocolate-mocha"
+    path: "white-chocolate-mocha",
+    quantity: 1,
+    size: "s"
   },
   {
     id: 20,
@@ -177,7 +215,9 @@ export const coffeeData = [
     price: 5.75,
     image: "https://images.unsplash.com/photo-1609682732059-37c3b5c2c4ef?w=400",
     rating: 4.6,
-    path: "pumpkin-spice-latte"
+    path: "pumpkin-spice-latte",
+    quantity: 1,
+    size: "s"
   }
 ];
 

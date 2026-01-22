@@ -4,7 +4,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function PaymentMethod() {
     const { colorScheme } = useTheme()
@@ -17,10 +16,6 @@ export default function PaymentMethod() {
         { id: 3, name: "Apple Pay", image: require("@/assets/images/a-pay.png"), method: "apple-pay" },
         { id: 4, name: "Google Pay", image: require("@/assets/images/g-pay.png"), method: "google-pay" },
     ]
-
-    const handlePaymentMethod = (method: string) => {
-        router.push("/payment/page")
-    }
 
     return (
         <View style={styles.container}>
@@ -56,7 +51,18 @@ export default function PaymentMethod() {
                 {/* Payment Methods */}
                 <View style={styles.paymentMethods}>
                     {paymentMethods.map((method) => (
-                        <TouchableOpacity key={method.id} style={styles.paymentCard} onPress={() => router.push("/payment/page")}>
+                        <TouchableOpacity 
+                            key={method.id} 
+                            style={styles.paymentCard} 
+                            onPress={() => {
+                                // Redirect to payment page for visa/mastercard, confirmation for others
+                                if (method.method === "visa" || method.method === "mastercard") {
+                                    router.push("/payment/page")
+                                } else {
+                                    router.push("/payment/confirmation/page")
+                                }
+                            }}
+                        >
                             <Image source={method.image} style={styles.paymentLogo} resizeMode="contain" />
                         </TouchableOpacity>
                     ))}

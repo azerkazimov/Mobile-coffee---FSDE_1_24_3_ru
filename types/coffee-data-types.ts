@@ -6,4 +6,6 @@ export type Coffee = {
   image: string;
   rating: number;
   path: string;
+  quantity: number;
+  size: string
 };

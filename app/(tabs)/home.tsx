@@ -37,15 +37,15 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-  background: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: "100%",
-    zIndex: -1,
-  },
+    background: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      height: "100%",
+      zIndex: -1,
+    },
   container: {
     flex: 1,
     zIndex: 1,
