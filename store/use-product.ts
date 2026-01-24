@@ -4,39 +4,62 @@ import { create } from "zustand";
 
 export interface CoffeeStore {
     products: Coffee[];
+    totalPrice: number; 
     addProduct: (product: Coffee) => void;
     removeProduct: (id: number) => void;
-    getProduct: (id: number) => Coffee | undefined;
-    getProducts: () => Coffee[]; // [{},{id,title,price,image,rating,path}]
-    getProductCount: () => number;
-    getProductTotalPrice: () => number;
     clearProducts: () => void;
+
+    getProductCount: () => number;
 }
 
 export const useCoffeeStore = create<CoffeeStore>((set, get) => ({
     products: [],
-    addProduct: (product: Coffee) => {
-        try {
-            const productExists = get().products.find((p) => p.id === product.id);
-            if (productExists) {
-                set((state) => ({
-                    products: state.products.map((p) => p.id === product.id ? { ...p, quantity: p.quantity + 1 } : p)
-                }))
-            } else {
-                set((state) => ({
-                    products: [...state.products, { ...product, quantity: 1 }]
-                }))
-            }
-            AsyncStorage.setItem("products", JSON.stringify(get().products))
-        } catch (error) {
-            console.log("Error adding product:", error);
-        }
-    },
-    removeProduct: (id: number) => set((state) => ({ products: state.products.filter((product) => product.id !== id) })),
-    getProduct: (id: number) => get().products.find((product) => product.id === id),
-    getProducts: () => get().products, //[{},{},{}.....]
-    getProductCount: () => get().products.length,
-    getProductTotalPrice: () => get().products.reduce((total, product) => total + (product.price * (product.quantity || 1)), 0),
-    clearProducts: () => set({ products: [] }),
-}))
+    totalPrice: 0,
 
+    addProduct: (product: Coffee) => {
+        set((state) => {
+            const productExists = state.products.find((p) => p.id === product.id);
+            let updatedProducts;
+
+            if (productExists) {
+                updatedProducts = state.products.map((p) =>
+                    p.id === product.id ? { ...p, quantity: (p.quantity || 0) + 1 } : p
+                );
+            } else {
+                updatedProducts = [...state.products, { ...product, quantity: 1 }];
+            }
+
+            // Считаем новую сумму сразу при обновлении стейта
+            const newTotal = updatedProducts.reduce(
+                (sum, p) => sum + p.price * (p.quantity || 1), 0
+            );
+
+            // Сохраняем в локальное хранилище (побочный эффект)
+            AsyncStorage.setItem("products", JSON.stringify(updatedProducts));
+
+            return {
+                products: updatedProducts,
+                totalPrice: newTotal,
+            };
+        });
+    },
+
+    removeProduct: (id: number) => {
+        set((state) => {
+            const updatedProducts = state.products.filter((p) => p.id !== id);
+            const newTotal = updatedProducts.reduce(
+                (sum, p) => sum + p.price * (p.quantity || 1), 0
+            );
+            
+            AsyncStorage.setItem("products", JSON.stringify(updatedProducts));
+            return { products: updatedProducts, totalPrice: newTotal };
+        });
+    },
+
+    clearProducts: () => {
+        AsyncStorage.removeItem("products");
+        set({ products: [], totalPrice: 0 });
+    },
+
+    getProductCount: () => get().products.reduce((count, p) => count + (p.quantity || 0), 0),
+}));

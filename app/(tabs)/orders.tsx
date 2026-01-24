@@ -8,14 +8,16 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-nati
 export default function Orders() {
     const layoutTheme = useTheme();
     const styles = getStyles(layoutTheme.colorScheme);
-    const { products, getProductTotalPrice, clearProducts } = useCoffeeStore()
+    const { products, totalPrice, clearProducts } = useCoffeeStore()
+   
+    
     return (
         <View style={styles.container}>
             <Gradient />
             <ScrollView style={styles.content}>
                 <View style={styles.header}>
                     <Text style={styles.headerTitle}>Orders</Text>
-                    <Text style={styles.ordersFooterText}>Total: ${getProductTotalPrice()}</Text>
+                    <Text style={styles.ordersFooterText}>Total: ${totalPrice.toFixed(2)}</Text>
                     <TouchableOpacity onPress={clearProducts}>
                         <Text style={styles.ordersFooterText}>Clear</Text>
                     </TouchableOpacity>
@@ -70,6 +72,4 @@ const getStyles = (colorScheme: string) => StyleSheet.create({
         borderRadius: 5,
     },
     ordersFooterText: {},
-
-
 })

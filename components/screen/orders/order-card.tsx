@@ -19,7 +19,7 @@ export default function OrderCard({ product }: { product: Coffee }) {
                 <Image source={{ uri: product.image }} style={styles.image} />
                 <View style={styles.infoContent}>
                     <Text style={styles.title}>{product.title}</Text>
-                    <Text style={styles.price}>{product.price}</Text>
+                    <Text style={styles.price}>${(product.price * product.quantity).toFixed(2)}</Text>
                 </View>
                 <View style={styles.quantityWrap}>
                     <Text style={styles.quantity}>{product.quantity}</Text>
