@@ -44,7 +44,7 @@ export default function Profile() {
   }
 
   const handleLogout = () => {
-    AsyncStorage.removeItem("isLoggedIn");
+    AsyncStorage.removeItem("isAuthenticated");
     router.push("/signin/page");
   };
 

@@ -1,7 +1,6 @@
 import { Image } from "expo-image";
 
 import {
-  Alert,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -13,53 +12,36 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Link, router } from "expo-router";
+import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { singInSchema, SingInSchemaType } from "./sign-in.schema";
+import { singUpSchema, SingUpSchemaType } from "./sign-up.schema";
 import Button from "@/components/ui/button";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function SignInScreen() {
+export default function SignUpScreen() {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<SingInSchemaType>({
-    resolver: zodResolver(singInSchema),
+  } = useForm<SingUpSchemaType>({
+    resolver: zodResolver(singUpSchema),
     defaultValues: {
+      name: "",
+      surname:"",
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = async (data: SingInSchemaType) => {
-    console.log("Login submit");
+  const onSubmit = async (data: SingUpSchemaType) => {
+    console.log("submit sign up");
     console.log(data);
     try {
-      const user = await AsyncStorage.getItem("user");
-
-      if (!user) {
-        Alert.alert("Error", "No user found. Please sign up first.");
-        return;
-      }
-
-      const userData = JSON.parse(user);
-
-      if (
-        userData.email === data.email &&
-        userData.password === data.password
-      ) {
-        console.log("User logged in", userData);
-        AsyncStorage.setItem("isAuthenticated", "true");
-
-        router.replace("/(tabs)/home");
-      } else {
-        Alert.alert("Error", "Invalid email or password");
-      }
-
+      router.push("/");
+      AsyncStorage.setItem("user", JSON.stringify(data));
     } catch (error) {
       console.log(error);
     }
@@ -95,6 +77,45 @@ export default function SignInScreen() {
             </View>
 
             <View style={styles.form}>
+              <Controller
+                control={control}
+                name="name"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    placeholder="Your name"
+                    placeholderTextColor="rgba(255,255,255,0.6)"
+                    autoCapitalize="none"
+                    keyboardType="default"
+                    style={styles.input}
+                  />
+                )}
+              />
+              {errors.name && (
+                <Text style={styles.error}>{errors.name.message}</Text>
+              )}
+              <Controller
+                control={control}
+                name="surname"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    placeholder="Your surname"
+                    placeholderTextColor="rgba(255,255,255,0.6)"
+                    autoCapitalize="none"
+                    keyboardType="default"
+                    style={styles.input}
+                  />
+                )}
+              />
+              {errors.surname && (
+                <Text style={styles.error}>{errors.surname.message}</Text>
+              )}
+
               <Controller
                 control={control}
                 name="email"
@@ -134,11 +155,7 @@ export default function SignInScreen() {
               {errors.password && (
                 <Text style={styles.error}>{errors.password.message}</Text>
               )}
-              <Button onPress={handleSubmit(onSubmit)}>Signin</Button>
-              <View style={styles.signupContainer}>
-                <Text style={styles.signupText}>{`Don't have an account?`}</Text>
-                <Link href="/signup/page" style={styles.signupLink}>Sign up</Link>
-              </View>
+              <Button onPress={handleSubmit(onSubmit)}>Sign up</Button>
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
@@ -217,21 +234,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#FFFFFF",
     fontSize: 18,
-    fontWeight: "600",
-  },
-  signupContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: 4,
-  },
-  signupText: {
-    color: "#FFFFFF",
-    fontSize: 14,
-  },
-  signupLink: {
-    color: "#8B5A2B",
-    fontSize: 14,
     fontWeight: "600",
   },
 });

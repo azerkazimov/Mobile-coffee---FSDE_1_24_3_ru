@@ -9,27 +9,30 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Index() {
   const router = useRouter();
 
-  useEffect(()=>{
-    const checkLoggedIn = async ()=>{
+  useEffect(() => {
+    const checkAuthentication = async () => {
       try {
-        const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
-        if(isLoggedIn){
-          router.push("/(tabs)/home");
+        const isAuthenticated = await AsyncStorage.getItem("isAuthenticated");
+        if (isAuthenticated === "true") {
+          router.replace("/(tabs)/home");
         } else {
-          router.push("/signin/page");
+          router.replace("/signin/page");
         }
       } catch (error) {
-        Alert.alert("Error", "Failed to check if user is logged in");
-        console.log(error);
+        console.error("Error checking authentication:", error);
+        Alert.alert(
+          "Error",
+          "An error occurred during authentication. Please try again."
+        );
       }
-    }
-    const timer = setTimeout(()=>{
-      checkLoggedIn();
-    }, 1000);
-    return ()=> clearTimeout(timer);
+    };
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    const timer = setTimeout(() => {
+      checkAuthentication();
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [router]);
 
   return (
     <>
@@ -64,16 +67,7 @@ export default function Index() {
               The best gain, the finest roast, the{"\n"}powerful flavor.
             </Text>
 
-            <Button
-              onPress={() => router.push("/signin/page")}
-            >
-              Get Started
-            </Button>
-
-            {/* <a href="/contact/page">Go to Contact Page</a>  => <Link/>*/}
-            <Link href="/contact/page" style={styles.hiddenLink}>
-              Go to Contact Page
-            </Link>
+            
           </View>
         </View>
       </SafeAreaView>

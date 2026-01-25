@@ -7,6 +7,7 @@ export interface CoffeeStore {
     totalPrice: number; 
     addProduct: (product: Coffee) => void;
     removeProduct: (id: number) => void;
+    decreaseQuantity: (id: number) => void;
     clearProducts: () => void;
 
     getProductCount: () => number;
@@ -51,6 +52,28 @@ export const useCoffeeStore = create<CoffeeStore>((set, get) => ({
                 (sum, p) => sum + p.price * (p.quantity || 1), 0
             );
             
+            AsyncStorage.setItem("products", JSON.stringify(updatedProducts));
+            return { products: updatedProducts, totalPrice: newTotal };
+        });
+    },
+
+    decreaseQuantity: (id: number) => {
+        set((state) => {
+            const product = state.products.find((p) => p.id === id);
+            let updatedProducts;
+
+            if (product && product.quantity > 1) {
+                updatedProducts = state.products.map((p) =>
+                    p.id === id ? { ...p, quantity: p.quantity - 1 } : p
+                );
+            } else {
+                updatedProducts = state.products.filter((p) => p.id !== id);
+            }
+
+            const newTotal = updatedProducts.reduce(
+                (sum, p) => sum + p.price * (p.quantity || 1), 0
+            );
+
             AsyncStorage.setItem("products", JSON.stringify(updatedProducts));
             return { products: updatedProducts, totalPrice: newTotal };
         });

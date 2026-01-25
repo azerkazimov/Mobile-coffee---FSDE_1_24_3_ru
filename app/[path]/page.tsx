@@ -34,6 +34,7 @@ export default function CoffeeDetail() {
   const handleAddToCart = () => {
     addProduct(coffee as Coffee)
     Alert.alert("Product added to cart");
+    router.back();
   };
 
   const handleSize = () => {
